@@ -16,7 +16,7 @@ X_test = X_test / 255
 y_train = np_utils.to_categorical(y_train)
 y_test = np_utils.to_categorical(y_test)
 num_classes = y_test.shape[1]
-units=3
+units=3*2
 # define baseline model
 model = Sequential()
 model.add(Dense(units, input_dim=num_pixels, kernel_initializer='normal', activation='relu'))
@@ -26,8 +26,10 @@ model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accur
 model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=5, batch_size=200, verbose=0)
 # Final evaluation of the model
 scores = model.evaluate(X_test, y_test, verbose=0)
-with open ("file1.txt",'w') as f1:
+
+with open ("/python/file1.txt",'w') as f1:
 	f1.write(str(int(scores[1]*100)))
 
+print(int(scores[1]*100))
 
 
